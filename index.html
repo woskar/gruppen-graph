@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Oskar Weinfurtner, Marcel Huppert">
+    <link rel="icon" href="">
+
+    <title>SoziOLANGograph</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="bootstrap3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-select/css/bootstrap-select.css">
+    <link rel="stylesheet" href="fa/css/font-awesome.min.css">
+    <link rel="stylesheet" href="tether/css/tether.min.css">
+
+    <!-- Custom styles for this template -->
+    <style type="text/css">
+      body {
+        padding-top: 5rem;
+      }
+
+      .my-3 {
+        margin-top: 3rem !important;
+        margin-bottom: 3rem !important;
+      }
+
+      .fa {
+        margin-right: 1rem;
+      }
+    </style>
+  </head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <a class="navbar-brand" href="#">SoziOLANGograph</a>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="index.html">Abstimmung</a>
+        </li>
+        <li>
+          <a href="graph.html">Ergebnisse</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="starter-template jumbotron">
+            <h1>Sozi<b>olang</b>ograph</h1>
+	    <p class="lead">Hi du! Ja, du! Schön, dass du hergefunden hast.</p>
+            <p>Der Sozi<b>olang</b>ograph ist ein Gemeinschafts-Experiment und kann zeigen, welche Cliquen und Freundschaften sich in Olang gebildet haben.</p>
+            <p>Es würde uns freuen, wenn du mitmachst. Trage dazu einfach unten deinen Namen und die Freunde ein, mit denen du dich besonders gut verstehst.
+            </p>
+            <p>Heute (und nur heute) beim bunten Abend gibt es den Graphen (mit den Vornamen) dann zu sehen. Hast du noch Vorschläge für uns? Sprich uns einfach an, wir freuen uns :D</p>
+          </div>
+        </div>
+      </div>
+      <form action="name2list.cgi" method="get" class="form-horizontal" role="form" enctype="multipart/form-data">
+        <legend>Freunde angeben</legend>
+
+        <div class="row my-3">
+          <label for="input-name" class="col-sm-2">Name</label>
+          <select class="selectpicker col-sm-10 col-xs-12" name="name" id="input-name"
+                  data-dropup-auto="true"
+                  data-live-search="true"
+                  data-select-on-tab="true"
+                  data-max-options="1"
+                  data-show-tick="true">
+          </select>
+        </div>
+
+        <div class="row my-3">
+          <label for="input-friends" class="col-sm-2">Freunde</label>
+          <select class="selectpicker col-sm-10 col-xs-12" name="addr" id="input-friends"
+                  data-dropup-auto="true"
+                  data-live-search="true"
+                  data-select-on-tab="true",
+                  data-show-tick="true" multiple>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-10 col-sm-offset-2">
+            <button type="submit" class="btn btn-block btn-primary"><i class="fa fa-send"></i>Abschicken</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="jquery/js/jquery-3.1.1.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        'use strict'
+
+        $.getJSON('names.json', function(data) {
+
+          var names = data;
+          console.log(names);
+          $(names).each(function(index, element) {
+            if(index > 0) {
+              $('#input-name').append('<option>' + element.Vorname + ' ' + element.Nachname + '</option>');
+              $('#input-friends').append('<option>' + element.Vorname + ' ' + element.Nachname + '</option>');
+            }
+          });
+          $('.selectpicker').selectpicker('refresh');
+          $('.selectpicker').selectpicker('render');
+        });
+      });
+    </script>
+
+
+    <script src="tether/js/tether.min.js"></script>
+    <script src="bootstrap3/js/bootstrap.min.js"></script>
+    <script src="bootstrap-select/js/bootstrap-select.js"></script>
+    <script src="bootstrap-select/js/i18n/defaults-de_DE.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script>
+      (function() {
+        'use strict'
+
+        if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+          var msViewportStyle = document.createElement('style')
+          msViewportStyle.appendChild(
+            document.createTextNode(
+              '@-ms-viewport{width:auto!important}'
+            )
+          )
+          document.head.appendChild(msViewportStyle)
+        }
+
+      }())
+    </script>
+
+  </body>
+</html>
